@@ -269,6 +269,20 @@ const char CameraParameters::KEY_SONY_MAX_MULTI_FOCUS_NUM[] = "sony-max-multi-fo
 const char CameraParameters::KEY_SONY_SCENE_DETECT_SUPPORTED[] = "sony-scene-detect-supported";
 #endif
 
+#ifdef TCM11_CAM_PARAMS
+const char CameraParameters::KEY_FOCUS_AREA_CENTER[] = "focus-area-center";
+const char CameraParameters::KEY_EX_SUPPORTED_METERING_MODES[] = "semc-metering-mode-values";
+#ifdef QCOM_SONY_NEW_CAMERA
+const char CameraParameters::SCENE_MODE_DOCUMENT[] = "document";
+#else
+const char CameraParameters::EX_SCENE_MODE_DOCUMENT[] = "document";
+#endif
+const char CameraParameters::KEY_SEMC_METRY_MODE[] = "semc-metering-mode";
+const char CameraParameters::SEMC_METRY_CENTER[] = "center-weighted";
+const char CameraParameters::SEMC_METRY_FRAME[] = "frame-adverage";
+const char CameraParameters::SEMC_METRY_SPOT[] = "spot";
+#endif
+
 // Values for white balance settings.
 const char CameraParameters::WHITE_BALANCE_AUTO[] = "auto";
 const char CameraParameters::WHITE_BALANCE_INCANDESCENT[] = "incandescent";
@@ -950,7 +964,12 @@ void CameraParameters::getMeteringAreaCenter(int *x, int *y) const
         *y = (arr[1] + arr[3])/2; //center_y = (y1+y2)/2
     }
 }
-
+#ifdef QCOM_SONY_HARDWARE
+void CameraParameters::getFocusAreaCenter(int *x, int *y) const
+{
+ // dummy
+}
+#endif
 void CameraParameters::getTouchIndexAf(int *x, int *y) const
 {
     *x = -1;

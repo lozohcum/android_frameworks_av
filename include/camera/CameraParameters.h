@@ -609,6 +609,21 @@ public:
     // has no effect on still image capture.
     static const char KEY_VIDEO_STABILIZATION[];
 
+#ifdef TCM11_CAM_PARAMS
+#ifdef QCOM_SONY_NEW_CAMERA
+    static const char SCENE_MODE_DOCUMENT[];
+#else
+    static const char EX_SCENE_MODE_DOCUMENT[];
+#endif
+    static const char KEY_EX_SUPPORTED_METERING_MODES[];
+    static const char KEY_FOCUS_AREA_CENTER [];
+    static const char KEY_SEMC_METRY_MODE[];
+    static const char SEMC_METRY_CENTER[];
+    static const char SEMC_METRY_FRAME[];
+    static const char SEMC_METRY_SPOT[];
+    
+#endif
+
 #ifdef QCOM_HARDWARE
     static const char KEY_MEMORY_COLOR_ENHANCEMENT[];
     static const char KEY_SUPPORTED_MEM_COLOR_ENHANCE_MODES[];
@@ -1080,6 +1095,9 @@ public:
     void setOrientation(int orientation);
     void setPreviewFpsRange(int minFPS,int maxFPS);
     void getSupportedHfrSizes(Vector<Size> &sizes) const;
+#ifdef QCOM_SONY_HARDWARE
+    void getFocusAreaCenter(int *x, int *y) const;
+#endif
 #endif
 
 private:
